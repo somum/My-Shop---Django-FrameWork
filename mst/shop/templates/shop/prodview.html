@@ -1,0 +1,79 @@
+{% extends 'shop/basic.html' %}
+
+{% block title%} {{product.product_name}} - My Awesome Cart{% endblock %}
+{% block body %}
+<div class="container my-4">
+    <div class="row">
+    <div class="col-md-4">
+    <div class="row">
+        <img src="/media/{{product.image}}" width="233px" height="385px">
+    </div>
+        <div class="row">
+            <button class="btn btn-primary mx-3">Buy Now</button>
+            <button id="pr{{product.id}}" class="btn btn-primary cart">Add To Cart</button>
+        </div>
+
+    </div>
+
+    <div class="col-md-8">
+        <h5>{{product.product_name}}</h5>
+        <p><b>Tk.{{product.price}} </b></p>
+        <p>{{product.desc}}</p>
+
+
+    </div>
+    </div>
+
+
+</div>
+
+
+
+
+{% endblock %}
+
+
+
+
+{% block js %}
+<script>
+console.log('working');
+if(localStorage.getItem('cart') == null){
+var cart = {};
+}
+else
+{
+cart = JSON.parse(localStorage.getItem('cart'));
+document.getElementById('cart').innerHTML = Object.keys(cart).length;
+}
+$('.cart').click(function(){
+console.log('clicked');
+var idstr = this.id.toString();
+console.log(idstr);
+if (cart[idstr] !=undefined){
+cart[idstr] = cart[idstr] + 1;
+}
+else
+{
+cart[idstr] = 1;
+}
+console.log(cart);
+localStorage.setItem('cart', JSON.stringify(cart));
+
+function sum( obj ) {
+  var sum = 0;
+  for( var el in obj ) {
+    if( obj.hasOwnProperty( el ) ) {
+      sum += parseFloat( obj[el] );
+    }
+  }
+  return sum;
+}
+var summed = sum( cart );
+
+document.getElementById('cart').innerHTML = summed;
+
+
+});
+</script>
+{% endblock %}

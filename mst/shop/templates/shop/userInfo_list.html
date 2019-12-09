@@ -1,0 +1,30 @@
+{% extends 'shop/basic.html' %}
+
+{% block title%} User Information Register - My Awesome Cart{% endblock %}
+{% block body %}
+<table class="table table-bordered">
+    <thead class="alert-warning">
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Phone No</th>
+            <th>Companay</th>
+            <th>Position</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in users %}
+        <tr>
+            <td>{{ i.userfull_name }}</td>
+            <td>{{ i.phone_no }}</td>
+            <td>{{ i.user_email }}</td>
+            <td>{{ i.user_company }}</td>
+            <td>{{ i.user_position }}</td>
+            <td><center><a class="btn btn-sm btn-warning" href="/shop/edit_user_info/{{i.userInformation_id}}"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a class="btn btn-sm btn-danger" href="/shop/delete_user_info/{{i.userInformation_id}}"><span class="glyphicon glyphicon-trash"></span> Delete</a></center></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
